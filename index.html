@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bites and Bucks</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- GOOGLE FONTS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fascinate+Inline&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <h1>Bites and Bucks</h1>
+            <p id="current-date">Fetching data...</p>
+        </header>
+
+        <!-- Main Summary Grid -->
+        <main class="summary-grid">
+            <div class="card summary-card">
+                <h2>Calories</h2>
+                <div class="summary-content">
+                    <!-- WRAPPER for positioning text -->
+                    <div class="donut-chart-wrapper">
+                        <canvas id="calorie-chart"></canvas>
+                        <!-- TEXT inside the donut -->
+                        <span id="calorie-percent-text" class="donut-text"></span>
+                    </div>
+                    <div class="summary-details">
+                        <p>Goal: <span id="calorie-goal">0</span> kcal</p>
+                        <p>Consumed: <span id="calories-consumed">0</span> kcal</p>
+                        <p>Remaining: <span id="calories-remaining">0</span> kcal</p>
+                    </div>
+                </div>
+            </div>
+            <div class="card summary-card">
+                <h2>Food Spending</h2>
+                <div class="summary-content">
+                    <!-- WRAPPER for positioning text -->
+                    <div class="donut-chart-wrapper">
+                        <canvas id="budget-chart"></canvas>
+                        <!-- TEXT inside the donut -->
+                        <span id="budget-percent-text" class="donut-text"></span>
+                    </div>
+                    <div class="summary-details">
+                        <p>Goal: ₱ <span id="budget-goal">0</span></p>
+                        <p>Spent: ₱ <span id="budget-spent">0</span></p>
+                        <p>Remaining: ₱ <span id="budget-remaining">0</span></p>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Nutrients Section -->
+        <section class="card">
+            <h2>Today's Nutrients</h2>
+            <div class="nutrient-grid">
+                <div class="nutrient">
+                    <label>Protein</label>
+                    <div class="progress-bar">
+                        <div id="protein-progress" class="progress-fill"></div>
+                        <div id="protein-over" class="progress-over"></div>
+                    </div>
+                    <span id="protein-value">0g / 0g</span>
+                    </div>
+
+                    <div class="nutrient">
+                    <label>Carbs</label>
+                    <div class="progress-bar">
+                        <div id="carbs-progress" class="progress-fill"></div>
+                        <div id="carbs-over" class="progress-over"></div>
+                    </div>
+                    <span id="carbs-value">0g / 0g</span>
+                    </div>
+
+                    <div class="nutrient">
+                    <label>Fat</label>
+                    <div class="progress-bar">
+                        <div id="fat-progress" class="progress-fill"></div>
+                        <div id="fat-over" class="progress-over"></div>
+                    </div>
+                    <span id="fat-value">0g / 0g</span>
+                    </div>
+
+                    <div class="nutrient">
+                    <label>Sugar</label>
+                    <div class="progress-bar">
+                        <div id="sugar-progress" class="progress-fill"></div>
+                        <div id="sugar-over" class="progress-over"></div>
+                    </div>
+                    <span id="sugar-value">0g / 0g</span>
+                    </div>
+
+                    <div class="nutrient">
+                    <label>Fiber</label>
+                    <div class="progress-bar">
+                        <div id="fiber-progress" class="progress-fill"></div>
+                        <div id="fiber-over" class="progress-over"></div>
+                    </div>
+                    <span id="fiber-value">0g / 0g</span>
+                    </div>
+            </div>
+        </section>
+        
+        <!-- Material 3-style floating action button -->
+        <button id="fab-open" type="button"
+                class="m3-fab m3-fab--extended"
+                aria-haspopup="dialog" aria-controls="entry-modal" title="Add new entry">
+        <svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M21 13.34C20.37 13.12 19.7 13 19 13V5H5V18.26L6 17.6L9 19.6L12 17.6L13.04 18.29C13 18.5 13 18.76 13 19C13 19.65 13.1 20.28 13.3 20.86L12 20L9 22L6 20L3 22V3H21V13.34M17 9V7H7V9H17M15 13V11H7V13H15M18 15V18H15V20H18V23H20V20H23V18H20V15H18Z" fill="currentColor"/>
+        </svg>
+        <span class="m3-fab__label">Add New Entry</span>
+        </button>
+
+        <!-- Modal: floating sheet anchored bottom-right -->
+        <div id="entry-modal" class="m3-modal" aria-hidden="true">
+        <div class="m3-backdrop" data-close></div>
+        <section class="m3-sheet" role="dialog" aria-modal="true" aria-labelledby="entry-title">
+            <header class="m3-sheet-header">
+            <h3 id="entry-title">Add New Entry</h3>
+            <button id="modal-close" class="m3-icon-btn" aria-label="Close">
+                <svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M18.3 5.71 12 12.01 5.7 5.7 4.29 7.11 10.59 13.4 4.3 19.7 5.71 21.11 12 14.82 18.29 21.1 19.7 19.69 13.41 13.4 19.71 7.1z" fill="currentColor"/>
+                </svg>
+            </button>
+            </header>
+
+            <form id="json-form" autocomplete="off" class="m3-form">
+            <label class="m3-field">
+                <span class="m3-label">Data Input:</span>
+                <textarea id="json-input" rows="8" placeholder='Paste JSON payload here.'></textarea>
+            </label>
+
+            <label class="m3-field">
+                <span class="m3-label">Password</span>
+                <input id="api-token" type="password"/>
+            </label>
+
+            <div class="m3-actions">
+                <button id="submit-json" type="submit" class="m3-button m3-filled">Submit</button>
+                <button id="modal-cancel" type="button" class="m3-button m3-text">Cancel</button>
+            </div>
+            <div id="submit-status" class="subtitle" aria-live="polite"></div>
+            </form>
+        </section>
+        </div>
+
+        <!-- History Graph -->
+        <div class="history-grid">
+            <section class="card">
+                <h2>Calories - Week View</h2>
+                <p class="subtitle">Difference from daily goal</p>
+                <canvas id="calorie-history-chart"></canvas>
+            </section>
+
+            <section class="card">
+                <h2>Spending - Week View</h2>
+                <p class="subtitle">Difference from daily budget</p>
+                <canvas id="budget-history-chart"></canvas>
+            </section>
+        </div>
+        
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
