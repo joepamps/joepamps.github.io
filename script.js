@@ -1,5 +1,8 @@
 document.addEventListener('DOMContentLoaded', () => {
   Chart.defaults.color = '#a0a0a0';
+  Chart.defaults.font.family = "'Martian Mono', sans-serif";
+  Chart.defaults.font.size = 11;
+  Chart.defaults.font.weight = 'normal';
 
   const GOOGLE_SHEET_API_URL = 'https://script.google.com/macros/s/AKfycbzElQAjDOLgQhQ5KUhhbVa5qaY4m5d5iwrVNaPWxe1ulC-0zytjnYns1RYKxf5vwYdc/exec';
   const API = `${GOOGLE_SHEET_API_URL}?t=${Date.now()}`;
@@ -187,7 +190,8 @@ document.addEventListener('DOMContentLoaded', () => {
       const overPercent = Math.min(Math.max(((c - g) / g) * 100, 0), 100);
       progressEl.style.width = `${basePercent}%`;
       overEl.style.width = `${overPercent}%`;
-      valueEl.innerText = `${Math.round(c)}g / ${Math.round(g)}g`;
+      const cNum = Math.round(c);
+      valueEl.innerHTML = `${cNum < 10 ? '&nbsp;' : ''}${cNum}g / ${Math.round(g)}g`;
     };
     updateBar(el.proteinProgress, el.proteinOver, el.proteinValue, data.consumedProtein, data.goalProtein);
     updateBar(el.carbsProgress,   el.carbsOver,   el.carbsValue,   data.consumedCarbs,   data.goalCarbs);
