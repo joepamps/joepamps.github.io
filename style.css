@@ -1,14 +1,14 @@
 /* Basic Reset and Font Styling */
 :root {
-    --bg-color: #121212;
-    --card-color: #1e1e1e;
+    --bg-color: #212327;
+    --card-color: #2d313a;
     --text-color: #e0e0e0;
     --text-secondary: #a0a0a0;
     --primary-color: #03dac6;
     --secondary-color: #bb86fc;
-    --progress-bg: #333;
+    --progress-bg: #151515;
     --grid-color-default: #444;  /* Color for regular grid lines */
-    --grid-color-zero: #ff8a80;   /* Color for the zero line */
+    --grid-color-zero: #ced2da;   /* Color for the zero line */
     --donut-overflow-border-color: #000000;
 }
 
@@ -21,6 +21,7 @@
 body {
     font-family: 'Roboto', sans-serif;
     background-color: var(--bg-color);
+    background-image: url("data:image/svg+xml,%3Csvg width='20' height='20' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%232a2a2e' fill-opacity='0.4' fill-rule='evenodd'%3E%3Ccircle cx='3' cy='3' r='3'/%3E%3Ccircle cx='13' cy='13' r='3'/%3E%3C/g%3E%3C/svg%3E");
     color: var(--text-color);
     line-height: 1.6;
 }
@@ -63,9 +64,11 @@ header p {
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
+/* Style for CARD HEADERS */
 .card h2 {
+    font-family: "SUSE", sans-serif;
     margin-bottom: 1rem;
-    font-weight: 400;
+    font-weight: 600;
     border-bottom: 1px solid var(--progress-bg);
     padding-bottom: 0.5rem;
 }
@@ -95,8 +98,9 @@ header p {
 
 .donut-text {
     position: absolute; /* Positions the text over the canvas */
-    font-size: 1.4rem;
-    font-weight: 700;
+    font-family: "Martian Mono", sans-serif;
+    font-size: 1.2rem;
+    font-weight: 600;
     color: var(--text-color);
 }
 
@@ -119,7 +123,10 @@ header p {
 .nutrient {
     display: grid;
     /* This grid gives plenty of space for the text on the right */
-    grid-template-columns: 80px 1fr 100px;
+    font-family: "Martian Mono", sans-serif;  
+    font-weight: 200;
+    font-size: 0.9rem;
+    grid-template-columns: 80px 1fr 120px;
     align-items: center;
     gap: 1rem;
 }
@@ -131,7 +138,8 @@ header p {
 }
 
 .nutrient label {
-    font-weight: 400;
+    font-family: "Martian Mono", sans-serif;  
+    font-weight: 200;
     font-size: 0.9rem;
 }
 
@@ -154,7 +162,9 @@ header p {
 
 /* History Graph */
 .subtitle {
-    font-size: 0.9rem;
+    font-family: "IBM Plex Sans", sans-serif;  
+    font-weight: 400;
+    font-size: 0.8rem;
     color: var(--text-secondary);
     margin-bottom: 1rem;
 }
@@ -181,7 +191,7 @@ header p {
     border-radius: 8px;
     padding: 0.75rem;
     color: var(--text-color);
-    font-family: 'Roboto', sans-serif;
+    font-family: "IBM Plex Sans", sans-serif;
     resize: vertical;
 }
 
@@ -378,3 +388,4 @@ body { padding-bottom: 96px; } /* keep content clear of the FAB */
 @media (prefers-reduced-motion: reduce) {
   .m3-modal, .m3-sheet, .m3-fab { transition: none; }
 }
+
